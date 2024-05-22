@@ -1,5 +1,18 @@
-import Image from "next/image";
+"use client";
 
 export default function Home() {
-  return <div></div>;
+  return (
+    <div className="container m-3">
+      <h1>Suspence and Loading States</h1>
+
+      <ul>
+        <li>
+          <a href="/demoLoadingState">Loading States</a>
+        </li>
+        <li>
+          <a href="/demoSuspense">Suspense</a>
+        </li>
+      </ul>
+    </div>
+  );
 }
