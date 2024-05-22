@@ -1,6 +1,6 @@
+"use client";
 import { useState } from "react";
 import speakerAction from "./speaker-action";
-import { resolve } from "path";
 
 export default function SpeakerFavorite({ speaker }) {
   const [speakerLocal, setSpeakerLocal] = useState(speaker);

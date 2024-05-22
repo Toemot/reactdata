@@ -1,18 +1,33 @@
-"use server";
-const fs = require("fs");
-import path from "path";
+import path, { resolve } from "path";
+import fs from "fs";
+import SpeakerDetail from "./speaker-detail";
+
 const dataFilePath = path.join(process.cwd(), "data.json");
-export default async function speakerAction(updatedRecord) {
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export default async function SpeakerList() {
+  const speakers = await readData();
+  return (
+    <div className="container mt-3">
+      <div className="row">
+        {speakers.map((speaker) => (
+          <SpeakerDetail speaker={speaker} key={speaker.id} />
+        ))}
+      </div>
+    </div>
+  );
+
   async function readData() {
     try {
-      const data = fs.readFileSync(dataFilePath, "utf8");
+      await sleep(2000);
+      const data = await fs.readFile(dataFilePath, "utf8");
       return JSON.parse(data);
     } catch (error) {
       if (error.code === "ENOENT") {
         const defaultData = [
           {
             id: 1124,
-            firstName: "DouglasGuys",
+            firstName: "Douglas",
             lastName: "Crockford",
             favorite: true,
           },
@@ -20,7 +35,7 @@ export default async function speakerAction(updatedRecord) {
             id: 1530,
             firstName: "Tammy",
             lastName: "Baker",
-            favorite: true,
+            favorite: false,
           },
           {
             id: 2920,
@@ -35,15 +50,5 @@ export default async function speakerAction(updatedRecord) {
         throw error;
       }
     }
-  }
-
-  const records = await readData();
-  const recordIndex = records.findIndex(
-    (record) => record.id === updatedRecord.id
-  );
-  if (recordIndex > -1) {
-    records[recordIndex] = updatedRecord;
-    fs.writeFileSync(dataFilePath, JSON.stringify(records, null, 2));
-    return true;
   }
 }
