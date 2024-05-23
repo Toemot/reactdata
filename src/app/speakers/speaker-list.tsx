@@ -1,6 +1,6 @@
 import { useSpeakerDataContext } from "@/contexts/speaker-data-context";
 import { Speaker } from "@/lib/general-types";
-import SpeakerDetail from "./speaker-detail";
+import SpeakerDetail from "@/app/speakers/speaker-detail";
 
 export default function SpeakerList() {
   const { speakerState } = useSpeakerDataContext();

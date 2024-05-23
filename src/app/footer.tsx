@@ -48,7 +48,7 @@ const Footer = () => {
       </div>
 
       <div className="text-center p-3 copyright-background speaker-rounded-corners">
-        © 2023 Silicon Valley Code Camp
+        © 2023 Silicon Valley Code Camp Ibadan
       </div>
     </footer>
   );

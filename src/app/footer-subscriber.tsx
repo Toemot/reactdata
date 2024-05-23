@@ -3,7 +3,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 export default function FooterSubscribe() {
   const [email, setEmail] = useState<string>("");
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(true);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);

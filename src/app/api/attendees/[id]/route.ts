@@ -4,11 +4,9 @@ import {
   updateAttendeeRecord,
 } from "@/lib/prisma/attendee-utils";
 
-const sleep = (ms: number) => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-};
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export async function Get(
+export async function GET(
   request: Request,
   { params }: { params: { id: string } }
 ) {

@@ -1,18 +1,16 @@
+import { NextRequest } from "next/server";
 import {
   createAttendeeRecord,
   getAttendeeRecords,
 } from "@/lib/prisma/attendee-utils";
-import { NextRequest } from "next/server";
 
-const sleep = (ms: number) => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-};
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export async function GET(request: NextRequest) {
-  await sleep(2000);
+  // await sleep(2000);
   //   debugger;
-  const attendee = await getAttendeeRecords();
-  return new Response(JSON.stringify(attendee, null, 2), {
+  const attendees = await getAttendeeRecords();
+  return new Response(JSON.stringify(attendees, null, 2), {
     status: 200,
     headers: {
       "Content-Type": "application/json",

@@ -1,5 +1,5 @@
-import { Attendee } from "../general-types";
-import prisma from "./prisma";
+import { Attendee } from "@/lib/general-types";
+import prisma from "@/lib/prisma/prisma";
 import { randomUUID } from "node:crypto";
 
 export async function getAttendeeRecords() {
