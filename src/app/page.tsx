@@ -1,18 +1,19 @@
 "use client";
 
-export default function Home() {
-  return (
-    <div className="container m-3">
-      <h1>Suspence and Loading States</h1>
+import Footer from "./footer";
+import Header from "./header";
+import Nav from "./nav";
+import Home from "./home";
 
-      <ul>
-        <li>
-          <a href="/demoLoadingState">Loading States</a>
-        </li>
-        <li>
-          <a href="/demoSuspense">Suspense</a>
-        </li>
-      </ul>
+export default function HomePage() {
+  return (
+    <div className="container-fluid">
+      <Header />
+      <div className="full-page-border app-content-background">
+        <Nav />
+        <Home />
+      </div>
+      <Footer />
     </div>
   );
 }
