@@ -1,5 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
+"use client";
 import { Speaker } from "@/lib/general-types";
+import React from "react";
+import SpeakerFavoriteToggle from "@/app/speakers/speaker-favorite-toggle";
+import SpeakerDialogEdit from "@/app/speakers/speaker-dialog-edit";
+import SpeakerDeleteButton from "@/app/speakers/speaker-delete-button";
+import { useSession } from "next-auth/react";
 
 export default function SpeakerDetail({ speaker }: { speaker: Speaker }) {
   interface HTMLImageElementEvent
@@ -7,8 +13,12 @@ export default function SpeakerDetail({ speaker }: { speaker: Speaker }) {
     target: HTMLImageElement;
   }
   const handleImageError = (e: HTMLImageElementEvent) => {
-    e.target.src = "/images/speaker-pending.png";
+    e.target.src = "/images/speaker-pending.png"; // default speaker
   };
+
+  const { data: session } = useSession();
+  const isLoggedIn = !!session?.user;
+
   return (
     <div className="col-xl-6 col-ms-12">
       <div className="card border-0 h-100">
@@ -26,6 +36,19 @@ export default function SpeakerDetail({ speaker }: { speaker: Speaker }) {
 
           <div className="col-8 d-flex flex-column flex-nowrap">
             <div className="card-body">
+              <div className="speaker-action d-flex">
+                <div className="favoriteToggleWrapper">
+                  <SpeakerFavoriteToggle speakerId={speaker.id} />
+                </div>
+
+                {isLoggedIn && (
+                  <div className="modifyWrapper">
+                    <SpeakerDialogEdit speakerId={speaker.id} />
+                    <SpeakerDeleteButton speakerId={speaker.id} />
+                  </div>
+                )}
+              </div>
+
               <h4 className="card-title">
                 {speaker.firstName} {speaker.lastName}
               </h4>
